@@ -13,7 +13,7 @@ await page.locator("a:has-text('click here')").click();
 const newpage = await newPromise;
 await newpage.waitForLoadState();
 const text = await newpage.locator('h3').textContent();
-console.log(text);
+//console.log(text);
 
 
 })
