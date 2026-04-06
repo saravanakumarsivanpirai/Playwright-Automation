@@ -1,11 +1,9 @@
 
 import {test} from '@playwright/test';
 import { loginmethod } from '../tests/POM/method/loginmethod';
-import { context } from '@cucumber/cucumber';
 
 
-
-   
+  
 
 
 test('Login page', async({page})=>{
@@ -39,15 +37,11 @@ await page.waitForTimeout(5000);
  
  await page.waitForTimeout(5000);
 
-const context = await browser.newContext();
-  const page = await context.newPage();
-
-        
 await page.goto('https://www.testmuai.com/selenium-playground/')
 await page.locator('a:has-text("Window Popup Modal")').click(); 
 
 // Set up listener with timeout
-const newPagePromise = context.waitForEvent('page', { timeout: 5000 }).catch(e => {
+const newPagePromise = page.context().waitForEvent('page', { timeout: 5000 }).catch(e => {
   console.log('No new page detected, link may open externally');
   return null;
 });
