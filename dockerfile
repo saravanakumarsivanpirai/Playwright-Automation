@@ -20,4 +20,4 @@ COPY . .
 
 RUN npm install
 
-CMD ["npx", "playwright", "test"]
+CMD ["npx", "playwright", "test"]git 
