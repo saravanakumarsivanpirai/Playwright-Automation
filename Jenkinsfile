@@ -5,13 +5,13 @@ pipeline {
 
     stage('Install') {
       steps {
-        bat 'npm install'
+        sh 'npm install'
       }
     }
 
     stage('Run Tests') {
       steps {
-        bat 'npx playwright test'
+        sh 'npx playwright test'
       }
     }
   }
