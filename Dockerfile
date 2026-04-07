@@ -2,16 +2,20 @@ FROM jenkins/jenkins:lts
 
 USER root
 
-# Install Docker CLI
+# Install dependencies
 RUN apt-get update && \
-    apt-get install -y docker.io
+    apt-get install -y curl apt-transport-https ca-certificates gnupg lsb-release
 
-# Install Node + Playwright (already you added)
-RUN apt-get install -y curl && \
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+# Install Docker CLI
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable" > /etc/apt/sources.list.d/docker.list && \
+    apt-get update && \
+    apt-get install -y docker-ce-cli
+
+# Install Node + Playwright
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
-RUN npm install -g playwright && \
-    npx playwright install --with-deps
+RUN npx playwright install --with-deps || true
 
 USER jenkins
