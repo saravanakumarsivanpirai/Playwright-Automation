@@ -1,39 +1,18 @@
-<<<<<<< HEAD
 pipeline {
   agent any
 
   stages {
 
-    stage('Install') {
+    stage('Build Docker Image') {
       steps {
-        sh 'npm install'
+        sh 'docker build -t qa-automation .'
       }
     }
 
     stage('Run Tests') {
       steps {
-        sh 'npx playwright test'
+        sh 'docker run qa-automation'
       }
     }
   }
 }
-=======
-pipeline {
-  agent any
-
-  stages {
-
-    stage('Install') {
-      steps {
-        sh 'npm install'
-      }
-    }
-
-    stage('Run Tests') {
-      steps {
-        sh 'npx playwright test'
-      }
-    }
-  }
-}
->>>>>>> 5447b87 (Added Jenkinsfile and Dockerfile)
